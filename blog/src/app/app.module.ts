@@ -24,6 +24,9 @@ import {AuthService} from "./services/auth.service";
 import {AuthInterceptor} from './services/auth.interceptor';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
+import {AuthenticationService} from "./services/authentication.service";
+import {HttpIntercepterBasicAuthService} from "./services/interceptor-auth.service";
 
 
 
@@ -47,6 +50,7 @@ import { SignupComponent } from './components/signup/signup.component';
     AddPostComponent,
     LoginComponent,
     SignupComponent,
+    NewPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,9 +61,10 @@ import { SignupComponent } from './components/signup/signup.component';
   providers: [
     DataService,
     AuthService,
+    AuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
+      useClass: HttpIntercepterBasicAuthService,
       multi: true
     },
 
